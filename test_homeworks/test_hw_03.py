@@ -18,13 +18,13 @@ def hw_path(base_hw_path):
 def test_editor(hw_path, number):
     data_dir = hw_path / "data" / "editor"
     sample_csv = data_dir / "samples" / f"{number}.csv"
-    expected_txt = data_dir / "expected" / f"{number}.csv"
+    expected_txt = data_dir / "expected" / f"{number}.txt"
 
     with tempfile.NamedTemporaryFile(delete_on_close=False) as result_file:
         result_file.close()
         editor_main(sample_csv, result_file.name)
 
-        assert filecmp(expected_txt, result_file)
+        assert filecmp.cmp(expected_txt, result_file, shallow=False)
 
 
 @pytest.mark.parametrize("number", ("1", "2"))
@@ -44,4 +44,4 @@ def test_shopping_list(hw_path, number):
             result_file.name
         )
 
-        assert filecmp(expected_txt, result_file)
+        assert filecmp.cmp(expected_txt, result_file, shallow=False)
