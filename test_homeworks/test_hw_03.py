@@ -24,7 +24,7 @@ def test_editor(hw_path, number):
         result_file.close()
         editor_main(sample_csv, result_file.name)
 
-        assert filecmp.cmp(expected_txt, result_file, shallow=False)
+        assert filecmp.cmp(expected_txt, result_file.name, shallow=False)
 
 
 @pytest.mark.parametrize("number", ("1", "2"))
@@ -44,4 +44,4 @@ def test_shopping_list(hw_path, number):
             result_file.name
         )
 
-        assert filecmp.cmp(expected_txt, result_file, shallow=False)
+        assert filecmp.cmp(expected_txt, result_file.name, shallow=False)
